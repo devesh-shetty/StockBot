@@ -44,6 +44,8 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 })
 .matches('stock info', (session, args) => {
 
+    session.send(' Debugging (%s)\'.', args);
+
     var url = 'http://finance.yahoo.com/quote/aapl?ltr=1';
 
 
@@ -76,7 +78,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
             // json.price = $('span[data-reactid="279"]').text();
             //console.log(json);
 
-            session.send('Hi! This is the stock intent handler. You said: \'%s (%s)\'.', json.name,
+            session.send(' \'%s \n (%s)\'.', json.name,
          json.price);
         }
     })
