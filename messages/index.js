@@ -9,7 +9,6 @@ var builder = require("botbuilder");
 var botbuilder_azure = require("botbuilder-azure");
 var yahooFinance = require('yahoo-finance');
 
-require('colors');
 
 var useEmulator = (process.env.NODE_ENV == 'development');
 
