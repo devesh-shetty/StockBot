@@ -54,17 +54,19 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
             var title, release, rating;
             var json = { price : "", name : "", rating : ""};
 
+             var parent = $("#quote-header-info");
+            json.name = parent.children().first().children().first().children().first().text();
+json.price = 100;
              
-             
-                json.name = $('h1').filter(function(i, el) {
+                // json.name = $('h1').filter(function(i, el) {
                             
-                            return $(this).attr('data-reactid') === '250';
-                            }).text();
+                //             return $(this).attr('data-reactid') === '250';
+                //             }).text();
 
-                            json.price = $('span').filter(function(i, el) {
+                //             json.price = $('span').filter(function(i, el) {
                             
-                            return $(this).attr('data-reactid') === '279';
-                            }).val();
+                //             return $(this).attr('data-reactid') === '279';
+                //             }).val();
 
              //json.price = $('span').attr('data-reactid','279').text();
 
