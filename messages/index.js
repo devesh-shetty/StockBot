@@ -45,7 +45,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 .matches('stock info', (session, args) => {
 
     //session.send(' Debugging (%s)\'.', args);
-    var companyName = args.entities.entity;
+    var companyName = args.entity;
 
     var url = 'http://finance.yahoo.com/quote/'+companyName+'?ltr=1';
 
