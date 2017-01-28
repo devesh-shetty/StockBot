@@ -64,7 +64,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
                             json.price = $('span').filter(function(i, el) {
                             
                             return $(this).attr('data-reactid') === '279';
-                            }).text();
+                            }).val();
 
              //json.price = $('span').attr('data-reactid','279').text();
 
