@@ -17,7 +17,7 @@ var express = require('express');
 
 //var useEmulator = (process.env.NODE_ENV == 'development');
 
-var useEmulator = true;
+var useEmulator = false;
 
 var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure.BotServiceConnector({
     appId: 'ad6d25e4-a8b4-426e-ae29-85956e466348',
