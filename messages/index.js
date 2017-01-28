@@ -57,9 +57,9 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
             // json.name = $('h1').attr('data-reactid','250').text();
             // json.price = $('span').attr('data-reactid','279').text();
 
-            json.name = $('h1[data-reactid="250"]').val();
-            json.price = $('span[data-reactid="279"]').val();
-            console.log(json);
+            json.name = $('h1[data-reactid="250"]').text();
+            json.price = $('span[data-reactid="279"]').text();
+            //console.log(json);
 
             session.send('Hi! This is the stock intent handler. You said: \'%s (%s)\'.', json.name,
          json.price);
