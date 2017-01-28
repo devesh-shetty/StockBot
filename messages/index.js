@@ -56,12 +56,17 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 
              
              
-                json.name=        $('h1').filter(function(i, el) {
+                json.name = $('h1').filter(function(i, el) {
                             
                             return $(this).attr('data-reactid') === '250';
                             }).text();
 
-             json.price = $('span').attr('data-reactid','279').text();
+                            json.price = $('span').filter(function(i, el) {
+                            
+                            return $(this).attr('data-reactid') === '279';
+                            }).text();
+
+             //json.price = $('span').attr('data-reactid','279').text();
 
             // json.name = $('h1[data-reactid="250"]').text();
             // json.price = $('span[data-reactid="279"]').text();
