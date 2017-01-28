@@ -15,7 +15,9 @@ var express = require('express');
     var cheerio = require('cheerio');
     var app     = express();
 
-var useEmulator = (process.env.NODE_ENV == 'development');
+//var useEmulator = (process.env.NODE_ENV == 'development');
+
+var useEmulator = true;
 
 var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure.BotServiceConnector({
     appId: 'ad6d25e4-a8b4-426e-ae29-85956e466348',
@@ -46,8 +48,8 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 
     //session.send(' Debugging (%s)\'.', args);
     var companyEntity = builder.EntityRecognizer.findEntity(args.entities, 'stockname');
-
-    session.send(args.entities);
+    companyEntity = 'aapl';
+    //console.table(args);
 
     var url = 'http://finance.yahoo.com/quote/'+companyEntity+'?ltr=1';
 
