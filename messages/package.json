@@ -7,7 +7,10 @@
     "botbuilder": "^3.4.2",
     "botbuilder-azure": "0.0.1",
     "yahoo-finance": "^0.2.16",
-    "util":"^0.10.3" 
+    "util":"^0.10.3",
+    "express"    : "latest",
+    "request"    : "latest",
+    "cheerio"    : "latest" 
   },
   "devDependencies": {
       "restify": "^4.1.1"

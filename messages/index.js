@@ -9,6 +9,11 @@ var builder = require("botbuilder");
 var botbuilder_azure = require("botbuilder-azure");
 var yahooFinance = require('yahoo-finance');
 
+var express = require('express');
+    var fs = require('fs');
+    var request = require('request');
+    var cheerio = require('cheerio');
+    var app     = express();
 
 var useEmulator = (process.env.NODE_ENV == 'development');
 
@@ -39,30 +44,51 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 })
 .matches('stock info', (session, args) => {
 
-    var SYMBOL = 'AAPL';
+    var url = 'http://finance.yahoo.com/quote/aapl?ltr=1';
 
-    yahooFinance.historical({
-    symbol: SYMBOL,
-    from: '2017-01-27',
-    to: '2017-01-28',
-    period: 'd'
-    }, function (err, quotes) {
-    if (err) { throw err; }
+
+    request(url, function(error, response, html){
+        if(!error){
+            var $ = cheerio.load(html);
+
+            var title, release, rating;
+            var json = { price : "", name : "", rating : ""};
+
+            // We'll use the unique header class as a starting point.
+
+            json.name = $('h1[data-reactid="250"]').text();
+            json.price = $('span[data-reactid="279"]').text();
+            session.send('Hi! This is the stock intent handler. You said: \'%s (%d)\'.', json.name,
+         json.price);
+        }
+    })
+   
+   
+   
+    // var SYMBOL = 'AAPL';
+
+    // yahooFinance.historical({
+    // symbol: SYMBOL,
+    // from: '2017-01-27',
+    // to: '2017-01-28',
+    // period: 'd'
+    // }, function (err, quotes) {
+    // if (err) { throw err; }
 
    
 
-            session.send('Hi! This is the stock intent handler. You said: \'%s (%d)\'.', SYMBOL,
-        quotes.length);
-    if (quotes[0]) {
-        console.log(
-        '%s\n...\n%s',
-        JSON.stringify(quotes[0], null, 2),
-        JSON.stringify(quotes[quotes.length - 1], null, 2)
-        );
-    } else {
-        console.log('N/A');
-    }
-    });
+    //         session.send('Hi! This is the stock intent handler. You said: \'%s (%d)\'.', SYMBOL,
+    //     quotes.length);
+    // if (quotes[0]) {
+    //     console.log(
+    //     '%s\n...\n%s',
+    //     JSON.stringify(quotes[0], null, 2),
+    //     JSON.stringify(quotes[quotes.length - 1], null, 2)
+    //     );
+    // } else {
+    //     console.log('N/A');
+    // }
+    // });
     
     //session.send('Hi! This is the stock intent handler. You said: \'%s\'.', session.message.text);
 })
