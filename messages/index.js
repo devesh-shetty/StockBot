@@ -7,7 +7,7 @@ http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 "use strict";
 var builder = require("botbuilder");
 var botbuilder_azure = require("botbuilder-azure");
-//var yahooFinance = require('yahoo-finance');
+var yahooFinance = require('yahoo-finance');
 
 var useEmulator = (process.env.NODE_ENV == 'development');
 
