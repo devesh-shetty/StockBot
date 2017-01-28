@@ -56,7 +56,9 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 
              var parent = $("#quote-header-info");
             json.name = parent.children().first().children().first().children().first().text();
-json.price = 100;
+
+            json.price = parent.children().next().children().first().children().first().text();
+
              
                 // json.name = $('h1').filter(function(i, el) {
                             
