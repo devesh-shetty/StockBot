@@ -9,6 +9,8 @@ var builder = require("botbuilder");
 var botbuilder_azure = require("botbuilder-azure");
 var yahooFinance = require('yahoo-finance');
 
+require('colors');
+
 var useEmulator = (process.env.NODE_ENV == 'development');
 
 var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure.BotServiceConnector({
@@ -37,6 +39,31 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     session.send('Hi this you personal stockbot here, how can i help?');
 })
 .matches('stock info', (session, args) => {
+
+    var SYMBOL = 'AAPL';
+
+    yahooFinance.historical({
+    symbol: SYMBOL,
+    from: '2012-01-01',
+    to: '2012-12-31',
+    period: 'd'
+    }, function (err, quotes) {
+    if (err) { throw err; }
+    console.log(util.format(
+        '=== %s (%d) ===',
+        SYMBOL,
+        quotes.length
+    ).cyan);
+    if (quotes[0]) {
+        console.log(
+        '%s\n...\n%s',
+        JSON.stringify(quotes[0], null, 2),
+        JSON.stringify(quotes[quotes.length - 1], null, 2)
+        );
+    } else {
+        console.log('N/A');
+    }
+    });
     
     session.send('Hi! This is the stock intent handler. You said: \'%s\'.', session.message.text);
 })

@@ -6,7 +6,8 @@
   "dependencies": {
     "botbuilder": "^3.4.2",
     "botbuilder-azure": "0.0.1",
-    "yahoo-finance": "^0.2.16" 
+    "yahoo-finance": "^0.2.16",
+    "util":"^0.10.3" 
   },
   "devDependencies": {
       "restify": "^4.1.1",
