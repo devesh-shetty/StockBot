@@ -54,10 +54,8 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
             var title, release, rating;
             var json = { price : "", name : "", rating : ""};
 
-            // We'll use the unique header class as a starting point.
-
-            json.name = $('h1[data-reactid="250"]').text();
-            json.price = $('span[data-reactid="279"]').text();
+            json.name = $('h1').attr('data-reactid','250').text();
+            json.price = $('span').attr('data-reactid','279').text();
             session.send('Hi! This is the stock intent handler. You said: \'%s (%d)\'.', json.name,
          json.price);
         }
