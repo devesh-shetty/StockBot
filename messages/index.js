@@ -43,8 +43,8 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 
     yahooFinance.historical({
     symbol: SYMBOL,
-    from: '2012-01-01',
-    to: '2012-12-31',
+    from: '2017-01-27',
+    to: '2017-01-28',
     period: 'd'
     }, function (err, quotes) {
     if (err) { throw err; }
