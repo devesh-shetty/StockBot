@@ -49,11 +49,11 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     period: 'd'
     }, function (err, quotes) {
     if (err) { throw err; }
-    console.log(util.format(
-        '=== %s (%d) ===',
-        SYMBOL,
-        quotes.length
-    ).cyan);
+
+   
+
+            session.send('Hi! This is the stock intent handler. You said: \'%s (%d)\'.', SYMBOL,
+        quotes.length);
     if (quotes[0]) {
         console.log(
         '%s\n...\n%s',
@@ -65,7 +65,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     }
     });
     
-    session.send('Hi! This is the stock intent handler. You said: \'%s\'.', session.message.text);
+    //session.send('Hi! This is the stock intent handler. You said: \'%s\'.', session.message.text);
 })
 .matches('buy stocks', (session, args) => {
     session.send('Hi! This is the buy stock handler. You said: \'%s\'.', session.message.text);
