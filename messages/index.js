@@ -55,7 +55,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
             var json = { price : "", name : "", rating : ""};
 
              json.name = $('h1').attr('data-reactid','250').val();
-             json.price = $('span').attr('data-reactid','279').textContent;
+             json.price = $('span').attr('data-reactid','279').innerText();
 
             // json.name = $('h1[data-reactid="250"]').text();
             // json.price = $('span[data-reactid="279"]').text();
