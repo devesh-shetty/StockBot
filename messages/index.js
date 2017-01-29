@@ -17,7 +17,17 @@ var express = require('express');
 
 //var useEmulator = (process.env.NODE_ENV == 'development');
 
-var useEmulator = false;
+var useEmulator = true;
+
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
+  host     : 'sql8.freemysqlhosting.net',
+  user     : 'sql8156065',
+  password : 'Amv1BzJZWk',
+  database : 'sql8156065'
+});
+
+connection.connect();
 
 var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure.BotServiceConnector({
     appId: 'ad6d25e4-a8b4-426e-ae29-85956e466348',
@@ -48,12 +58,11 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 
     //session.send(' Debugging (%s)\'.', args);
     var companyEntity = builder.EntityRecognizer.findEntity(args.entities, 'stockname');
-    companyEntity = 'aapl';
-    //console.table(args);
+     companyEntity = 'aapl';
 
     var url = 'http://finance.yahoo.com/quote/'+companyEntity+'?ltr=1';
 
-
+    
     request(url, function(error, response, html){
         if(!error){
             var $ = cheerio.load(html);
@@ -67,58 +76,18 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
             json.price = parent.children().next().children().first().children().first().text();
 
              
-                // json.name = $('h1').filter(function(i, el) {
-                            
-                //             return $(this).attr('data-reactid') === '250';
-                //             }).text();
-
-                //             json.price = $('span').filter(function(i, el) {
-                            
-                //             return $(this).attr('data-reactid') === '279';
-                //             }).val();
-
-             //json.price = $('span').attr('data-reactid','279').text();
-
-            // json.name = $('h1[data-reactid="250"]').text();
-            // json.price = $('span[data-reactid="279"]').text();
-            //console.log(json);
-
             session.send(' \'%s \n (%s)\'.', json.name,
          json.price);
         }
     })
    
-   
-   
-    // var SYMBOL = 'AAPL';
-
-    // yahooFinance.historical({
-    // symbol: SYMBOL,
-    // from: '2017-01-27',
-    // to: '2017-01-28',
-    // period: 'd'
-    // }, function (err, quotes) {
-    // if (err) { throw err; }
-
-   
-
-    //         session.send('Hi! This is the stock intent handler. You said: \'%s (%d)\'.', SYMBOL,
-    //     quotes.length);
-    // if (quotes[0]) {
-    //     console.log(
-    //     '%s\n...\n%s',
-    //     JSON.stringify(quotes[0], null, 2),
-    //     JSON.stringify(quotes[quotes.length - 1], null, 2)
-    //     );
-    // } else {
-    //     console.log('N/A');
-    // }
-    // });
     
-    //session.send('Hi! This is the stock intent handler. You said: \'%s\'.', session.message.text);
 })
 .matches('buy stocks', (session, args) => {
-    session.send('Hi! This is the buy stock handler. You said: \'%s\'.', session.message.text);
+   
+
+
+    //session.send('Hi! This is the buy stock handler. You said: \'%s\'.', session.message.text);
 })
 .matches('trending stocks', (session, args) => {
     session.send('Hi! This is the trending handler. You said: \'%s\'.', session.message.text);

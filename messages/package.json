@@ -10,7 +10,8 @@
     "util":"^0.10.3",
     "express"    : "4.14.0",
     "request"    : "2.79.0",
-    "cheerio"    : "0.22.0" 
+    "cheerio"    : "0.22.0",
+    "mysql": "^2.5.4" 
   },
   "devDependencies": {
       "restify": "^4.1.1"
