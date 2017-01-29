@@ -17,7 +17,7 @@ var express = require('express');
 
 //var useEmulator = (process.env.NODE_ENV == 'development');
 
-var useEmulator = true;
+var useEmulator = false;
 
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
